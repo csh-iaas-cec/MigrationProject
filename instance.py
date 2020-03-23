@@ -23,12 +23,13 @@ image_source_details = oci.core.models.ImageSourceViaObjectStorageUriDetails(sou
 	source_type = source_type,
 	source_uri = object_storage_uri)
 
-
+tags = dict()
+tags["BLUEPRINT"] = object_name.split(".")[0]
 create_image_details = oci.core.models.CreateImageDetails(compartment_id = compartment_id, 
 	image_source_details = image_source_details, 
 	launch_mode = "PARAVIRTUALIZED",
 	display_name = object_name.split(".")[0],
-	freeform_tags = {"BLUEPRINT",object_name.split(".")[0]})
+	freeform_tags = tags)
 
 image_details = compute_client.create_image(create_image_details).data
 image_ocid = image_details.id
