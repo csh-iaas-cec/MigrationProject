@@ -1,2 +1,4 @@
 oci
+pypiwin32
+setuptools
 win10toast
