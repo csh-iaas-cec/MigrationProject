@@ -4,4 +4,4 @@ update oci config file
 
 pip install -r requirements.txt
 
-python instance.py object_name
+python instance.py object_name windows/linux
