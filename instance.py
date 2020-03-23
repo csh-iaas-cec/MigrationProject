@@ -29,7 +29,7 @@ create_image_details = oci.core.models.CreateImageDetails(compartment_id = compa
 image_details = compute_client.create_image(create_image_details).data
 image_ocid = image_details.id
 get_image_response = compute_client.get_image(image_ocid)
-wait_until_image_available_response = oci.wait_until(compute_client, get_image_response, 'lifecycle_state', 'AVAILABLE')
+wait_until_image_available_response = oci.wait_until(compute_client, get_image_response, 'lifecycle_state', 'AVAILABLE', max_wait_seconds=4800)
 print(wait_until_image_available_response.data)
 n.show_toast(object_name+" finished", "Hi your custom image has been created", duration = 10)
 
@@ -47,6 +47,6 @@ instance_details = compute_client.launch_instance(availability_domain = availabi
 	launch_options = instance_launch_options)
 instance_id = instance_details.data.id
 get_instance_response = compute_client.get_instance(instance_id)
-wait_until_instance_available_response = oci.wait_until(compute_client, get_instance_response, 'lifecycle_state', 'AVAILABLE')
+wait_until_instance_available_response = oci.wait_until(compute_client, get_instance_response, 'lifecycle_state', 'RUNNING', max_wait_seconds=4800)
 print(wait_until_instance_available_response.data)
 n.show_toast("Yaaaay!!! finished", "Hi your instance has been created", duration = 10)
