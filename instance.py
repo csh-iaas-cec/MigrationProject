@@ -25,11 +25,11 @@ image_source_details = oci.core.models.ImageSourceViaObjectStorageUriDetails(sou
 	source_uri = object_storage_uri)
 
 tags = dict()
-tags["BLUEPRINT"] = object_name.split(".")[0]
+tags["BLUEPRINT"] = object_name.split(".")[-1]
 create_image_details = oci.core.models.CreateImageDetails(compartment_id = compartment_id, 
 	image_source_details = image_source_details, 
 	launch_mode = "PARAVIRTUALIZED",
-	display_name = object_name.split(".")[0],
+	display_name = object_name.split(".")[-1],
 	freeform_tags = tags)
 
 image_details = compute_client.create_image(create_image_details).data
@@ -49,7 +49,7 @@ instance_launch_options = oci.core.models.LaunchOptions(boot_volume_type = "PARA
 
 launch_instance_details = oci.core.models.LaunchInstanceDetails(availability_domain = availability_domain,
 	compartment_id = compartment_id,
-	display_name = object_name.split(".")[0],
+	display_name = object_name.split(".")[-1],
 	subnet_id = subnet_id,
 	shape = shape,
 	source_details = instance_source_details,
