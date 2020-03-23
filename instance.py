@@ -1,5 +1,6 @@
 import oci
 import sys
+import time
 if(sys.argv[2]=="windows"):
 	from win10toast import ToastNotifier 
 	n = ToastNotifier() 
@@ -37,7 +38,8 @@ get_image_response = compute_client.get_image(image_ocid)
 wait_until_image_available_response = oci.wait_until(compute_client, get_image_response, 'lifecycle_state', 'AVAILABLE', max_wait_seconds=4800)
 print(wait_until_image_available_response.data)
 if(sys.argv[2] == "windows"):
-	n.show_toast(object_name+" finished", "Hi your custom image has been created", duration = 30)
+	n.show_toast(object_name+" finished", "Hi your custom image has been created", duration = 300, threaded = True)
+	time.sleep(0.2)
 
 
 ##################Creation of instance ############################
@@ -58,4 +60,4 @@ get_instance_response = compute_client.get_instance(instance_id)
 wait_until_instance_available_response = oci.wait_until(compute_client, get_instance_response, 'lifecycle_state', 'RUNNING', max_wait_seconds=4800)
 print(wait_until_instance_available_response.data)
 if(sys.argv[2] == "windows"):
-	n.show_toast("Yaaaay!!! finished", "Hi your instance has been created", duration = 30)
+	n.show_toast("Yaaaay!!! finished", "Hi your instance has been created", duration = 300)
